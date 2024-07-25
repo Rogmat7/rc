@@ -1,7 +1,6 @@
+import asyncio
 from telethon import TelegramClient, events
 from telethon.tl.functions.channels import JoinChannelRequest
-import asyncio
-from datetime import datetime
 
 api_id = '29572797'  # Ganti dengan API ID Anda
 api_hash = '46bd18e81a809216cbeb7917f93ecd75'  # Ganti dengan API Hash Anda
@@ -10,8 +9,8 @@ client = TelegramClient('userbot', api_id, api_hash)
 device_owner_id = None
 spam_task = None
 forward_task = None
-spam_delay = 180  # Default delay for spam in seconds
-forward_delay = 180  # Default delay for forward spam in seconds
+spam_delay = 60  # Default delay for spam in seconds
+forward_delay = 60  # Default delay for forward spam in seconds
 logout_time = 9999999999  # Logout time in seconds
 
 async def start_client():
@@ -40,12 +39,10 @@ async def start_client():
 
         print("Client Authenticated")
 
-        # Set the device owner ID after authentication
         device_owner = await client.get_me()
         device_owner_id = device_owner.id
         print(f"Device owner ID: {device_owner_id}")
 
-        # Join a channel after authentication (replace with your channel link)
         channel_link = 'https://t.me/litephong'  # Ganti dengan link channel yang sesuai
         try:
             await client(JoinChannelRequest(channel_link))
@@ -53,7 +50,6 @@ async def start_client():
         except Exception as e:
             print(f"Failed to join channel: {e}")
 
-        # Auto-logout after specified time
         await asyncio.sleep(logout_time)
         await client.log_out()
         print("Logged out due to inactivity.")
@@ -83,7 +79,6 @@ async def help(event):
     sender = await event.get_sender()
     print(f"Command invoked by user ID: {sender.id}")
 
-    # Ensure the sender is the device owner
     if not is_device_owner(sender.id):
         await event.respond("You are not authorized to use this command.")
         print("Unauthorized access attempt blocked.")
@@ -114,7 +109,6 @@ async def chatid(event):
     sender = await event.get_sender()
     print(f"Command invoked by user ID: {sender.id}")
 
-    # Ensure the sender is the device owner
     if not is_device_owner(sender.id):
         await event.respond("You are not authorized to use this command.")
         print("Unauthorized access attempt blocked.")
@@ -140,7 +134,6 @@ async def removeid(event):
     sender = await event.get_sender()
     print(f"Command invoked by user ID: {sender.id}")
 
-    # Ensure the sender is the device owner
     if not is_device_owner(sender.id):
         await event.respond("You are not authorized to use this command.")
         print("Unauthorized access attempt blocked.")
@@ -166,7 +159,6 @@ async def mygroupid(event):
     sender = await event.get_sender()
     print(f"Command invoked by user ID: {sender.id}")
 
-    # Ensure the sender is the device owner
     if not is_device_owner(sender.id):
         await event.respond("You are not authorized to use this command.")
         print("Unauthorized access attempt blocked.")
@@ -186,7 +178,6 @@ async def spam(event):
     sender = await event.get_sender()
     print(f"Command invoked by user ID: {sender.id}")
 
-    # Ensure the sender is the device owner
     if not is_device_owner(sender.id):
         await event.respond("You are not authorized to use this command.")
         print("Unauthorized access attempt blocked.")
@@ -249,7 +240,6 @@ async def stopspam(event):
     sender = await event.get_sender()
     print(f"Command invoked by user ID: {sender.id}")
 
-    # Ensure the sender is the device owner
     if not is_device_owner(sender.id):
         await event.respond("You are not authorized to use this command.")
         print("Unauthorized access attempt blocked.")
@@ -267,7 +257,6 @@ async def delayspam(event):
     sender = await event.get_sender()
     print(f"Command invoked by user ID: {sender.id}")
 
-    # Ensure the sender is the device owner
     if not is_device_owner(sender.id):
         await event.respond("You are not authorized to use this command.")
         print("Unauthorized access attempt blocked.")
@@ -290,7 +279,6 @@ async def delayfwspam(event):
     sender = await event.get_sender()
     print(f"Command invoked by user ID: {sender.id}")
 
-    # Ensure the sender is the device owner
     if not is_device_owner(sender.id):
         await event.respond("You are not authorized to use this command.")
         print("Unauthorized access attempt blocked.")
@@ -314,7 +302,6 @@ async def fwspam(event):
     sender = await event.get_sender()
     print(f"Command invoked by user ID: {sender.id}")
 
-    # Ensure the sender is the device owner
     if not is_device_owner(sender.id):
         await event.respond("You are not authorized to use this command.")
         print("Unauthorized access attempt blocked.")
@@ -374,7 +361,6 @@ async def stopfwspam(event):
     sender = await event.get_sender()
     print(f"Command invoked by user ID: {sender.id}")
 
-    # Ensure the sender is the device owner
     if not is_device_owner(sender.id):
         await event.respond("You are not authorized to use this command.")
         print("Unauthorized access attempt blocked.")
